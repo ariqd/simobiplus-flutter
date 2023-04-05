@@ -13,15 +13,11 @@ class SummaryPortofolio extends StatefulWidget {
 class _SummaryPortofolioState extends State<SummaryPortofolio>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  late ScrollController _scrollController;
   late bool fixedScroll;
 
   @override
   void initState() {
     _tabController = TabController(length: 6, vsync: this);
-    _tabController.addListener(_smoothScrollToTop);
-    _scrollController = ScrollController();
-    _scrollController.addListener(_scrollListener);
 
     super.initState();
   }
@@ -29,100 +25,75 @@ class _SummaryPortofolioState extends State<SummaryPortofolio>
   @override
   void dispose() {
     _tabController.dispose();
-    _scrollController.dispose();
     super.dispose();
-  }
-
-  _scrollListener() {
-    if (fixedScroll) {
-      _scrollController.jumpTo(0);
-    }
-  }
-
-  _smoothScrollToTop() {
-    _scrollController.animateTo(
-      0,
-      duration: const Duration(microseconds: 300),
-      curve: Curves.ease,
-    );
-
-    setState(() {
-      fixedScroll = _tabController.index == 2;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const SummaryPortofolioHeader(),
-          Container(
-            height: 50,
-            child: TabBar(
-              controller: _tabController,
-              isScrollable: true,
-              labelColor: Colors.black,
-              labelStyle: const TextStyle(
-                fontSize: 16,
-                // fontWeight: FontWeight.bold,
+      body: DefaultTabController(
+        length: 2,
+        child: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) => [
+            const SliverToBoxAdapter(child: SummaryPortofolioHeader()),
+            SliverToBoxAdapter(
+              child: TabBar(
+                controller: _tabController,
+                isScrollable: true,
+                labelColor: Colors.black,
+                labelStyle: const TextStyle(
+                  fontSize: 16,
+                  // fontWeight: FontWeight.bold,
+                ),
+                tabs: const [
+                  Tab(text: 'Account'),
+                  Tab(text: 'Time Deposit'),
+                  Tab(text: 'Credit Card'),
+                  Tab(text: 'Loan'),
+                  Tab(text: 'Investment'),
+                  Tab(text: 'Others'),
+                ],
               ),
-              tabs: const [
-                Tab(text: 'Account'),
-                Tab(text: 'Time Deposit'),
-                Tab(text: 'Credit Card'),
-                Tab(text: 'Loan'),
-                Tab(text: 'Investment'),
-                Tab(text: 'Others'),
-              ],
             ),
+            // The flexible app bar with the tabs
+            // SliverAppBar(
+            //   title: const Text('App Bar'),
+            //   expandedHeight: 200,
+            //   pinned: true,
+            //   forceElevated: innerBoxIsScrolled,
+            //   bottom: const TabBar(tabs: [
+            //     Tab(text: 'Tab 1'),
+            //     Tab(text: 'Tab 2'),
+            //   ]),
+            // )
+          ],
+          // The content of each tab
+          body: TabBarView(
+            controller: _tabController,
+            children: [
+              // ListView.builder(
+              //   itemBuilder: (context, index) => ListTile(
+              //     title: Text(
+              //       'Tab 1 content $index',
+              //     ),
+              //   ),
+              // ),
+              const SummarySavingAccount(),
+              const SummaryTimeDeposit(),
+              const SummarySavingAccount(),
+              const SummaryTimeDeposit(),
+              const SummarySavingAccount(),
+              const SummaryTimeDeposit(),
+              // ListView.builder(
+              //   itemBuilder: (context, index) => ListTile(
+              //     title: Text(
+              //       'Tab 2 content $index',
+              //     ),
+              //   ),
+              // ),
+            ],
           ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: <Widget>[
-                const SummarySavingAccount(),
-                const SummaryTimeDeposit(),
-                const Card(
-                  child: ListTile(
-                    leading: Icon(Icons.home),
-                    title: TextField(
-                      decoration:
-                          InputDecoration(hintText: 'Search for address...'),
-                    ),
-                  ),
-                ),
-                Card(
-                  child: ListTile(
-                    leading: const Icon(Icons.location_on),
-                    title:
-                        const Text('Latitude: 48.09342\nLongitude: 11.23403'),
-                    trailing: IconButton(
-                        icon: const Icon(Icons.my_location), onPressed: () {}),
-                  ),
-                ),
-                const Card(
-                  child: ListTile(
-                    leading: Icon(Icons.home),
-                    title: TextField(
-                      decoration:
-                          InputDecoration(hintText: 'Search for address...'),
-                    ),
-                  ),
-                ),
-                Card(
-                  child: ListTile(
-                    leading: const Icon(Icons.location_on),
-                    title:
-                        const Text('Latitude: 48.09342\nLongitude: 11.23403'),
-                    trailing: IconButton(
-                        icon: const Icon(Icons.my_location), onPressed: () {}),
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
