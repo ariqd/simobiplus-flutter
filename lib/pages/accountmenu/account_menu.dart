@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simobiplus/pages/accountmenu/account_settings_list.dart';
 import 'package:simobiplus/pages/accountmenu/account_editprofile.dart';
+import 'package:simobiplus/pages/atmservices/manage_atm.dart';
 import 'package:simobiplus/styling/greyLine.dart';
 import 'package:simobiplus/styling/paddinghorizontal.dart';
 import 'package:simobiplus/styling/paddingvertical.dart';
@@ -392,9 +393,18 @@ class AccountMenu extends StatelessWidget {
                 Center(
                   child: Column(
                     children: [
-                      AccountSettingsList(
-                          menu: 'product',
-                          menuTitle: 'Manage Account and ATM Card'),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ManageATM(),
+                              ),
+                            );
+                          },
+                          child: AccountSettingsList(
+                              menu: 'product',
+                              menuTitle: 'Manage Account and ATM Card')),
                       greyLine(),
                       AccountSettingsList(
                           menu: 'product',
@@ -415,6 +425,7 @@ class AccountMenu extends StatelessWidget {
                     ),
                   ],
                 ),
+                paddingvertical(size: 20),
                 Center(
                   child: Column(
                     children: [
