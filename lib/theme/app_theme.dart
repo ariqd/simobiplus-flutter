@@ -10,6 +10,8 @@ class AppTheme {
         foregroundColor: Colors.white,
         backgroundColor: Colors.pink.shade400,
         textStyle: const TextStyle(fontSize: 18),
+        disabledBackgroundColor: Colors.pink.shade400.withOpacity(0.6),
+        disabledForegroundColor: Colors.white,
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(

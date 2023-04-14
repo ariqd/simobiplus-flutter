@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:simobiplus/bottombar.dart';
 import 'package:simobiplus/components/sinarmas_button_secondary_rounded.dart';
 import 'package:simobiplus/packages/simas_icons.dart';
+import 'package:simobiplus/pages/accountmenu/clear_data.dart';
 
 class Easypin extends StatefulWidget {
   const Easypin({
@@ -126,6 +127,34 @@ class _EasypinState extends State<Easypin> {
                     const Text(
                       'Your account will be blocked after 3 incorrect attempts',
                       style: TextStyle(color: Colors.white),
+                    ),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          // fontSize: 20.0,
+                        ),
+                        children: <TextSpan>[
+                          const TextSpan(
+                              text: 'Have Login problem? ',
+                              style: TextStyle(color: Colors.white)),
+                          TextSpan(
+                            text: 'Reset EasyPIN',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              decoration: TextDecoration.underline,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => ClearDevice(),
+                                );
+                              },
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 8),
                     RichText(

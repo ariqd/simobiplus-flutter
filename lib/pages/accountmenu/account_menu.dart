@@ -5,6 +5,13 @@ import 'package:simobiplus/styling/greyLine.dart';
 import 'package:simobiplus/styling/paddinghorizontal.dart';
 import 'package:simobiplus/styling/paddingvertical.dart';
 
+import 'account_change_lang.dart';
+import 'account_login_pref.dart';
+import 'clear_data.dart';
+import 'account_chage_pass.dart';
+import 'account_chage_easypin.dart';
+import 'account_chage_device.dart';
+
 class AccountMenu extends StatelessWidget {
   const AccountMenu({super.key});
 
@@ -249,19 +256,39 @@ class AccountMenu extends StatelessWidget {
                               menuTxt: 'Keep your personal data updated',
                               menuIcon: 'assets/images/editProfile.png')),
                       greyLine(),
-                      AccountSettingsList(
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AccountChangeEasyPin(),
+                              ),
+                            );
+                          },
+                      child: AccountSettingsList(
                           menu: 'account',
                           menuTitle: 'Change EasyPIN',
                           menuTxt:
                               'Change your current EasyPIN for login and other verification purpose',
-                          menuIcon: 'assets/images/easypin.png'),
+                          menuIcon: 'assets/images/easypin.png')),
                       greyLine(),
-                      AccountSettingsList(
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AccountChangePass(),
+                              ),
+                            );
+                          },
+                      child: AccountSettingsList(
                           menu: 'account',
                           menuTitle: 'Change Password',
                           menuTxt:
                               'Change your current password for login and other verification purpose',
-                          menuIcon: 'assets/images/password.png'),
+                          menuIcon: 'assets/images/password.png')),
                       greyLine(),
                       AccountSettingsList(
                           menu: 'account',
@@ -289,31 +316,68 @@ class AccountMenu extends StatelessWidget {
                 Center(
                   child: Column(
                     children: [
-                      AccountSettingsList(
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AccountLoginPref(),
+                              ),
+                            );
+                          },
+                      child: AccountSettingsList(
                           menu: 'account',
                           menuTitle: 'Login preferences',
                           menuTxt: 'Manage your login options',
-                          menuIcon: 'assets/images/loginPre.png'),
+                          menuIcon: 'assets/images/loginPre.png')),
                       greyLine(),
-                      AccountSettingsList(
-                          menu: 'account',
-                          menuTitle: 'Language',
-                          menuTxt: 'Choose your prefered languages',
-                          menuIcon: 'assets/images/language.png'),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AccountChangeLang(),
+                              ),
+                            );
+                          },
+                          child: AccountSettingsList(
+                              menu: 'account',
+                              menuTitle: 'Language',
+                              menuTxt: 'Choose your prefered languages',
+                              menuIcon: 'assets/images/language.png')),
                       greyLine(),
-                      AccountSettingsList(
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AccountChangeDevice(),
+                              ),
+                            );
+                          },
+                          child: AccountSettingsList(
                           menu: 'account',
                           menuTitle: 'Change device',
                           menuTxt:
                               'Move your authenticated device into a fresh new one',
-                          menuIcon: 'assets/images/change.png'),
+                          menuIcon: 'assets/images/change.png')),
                       greyLine(),
-                      AccountSettingsList(
+                      GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => ClearDevice(),
+                            );
+                          },
+                          child: AccountSettingsList(
                           menu: 'account',
                           menuTitle: 'Clear SimobiPlus data',
                           menuTxt:
                               'Clearing app data resets the application to scratch',
-                          menuIcon: 'assets/images/cleardata.png'),
+                          menuIcon: 'assets/images/cleardata.png')),
                       greyLine(),
                     ],
                   ),
