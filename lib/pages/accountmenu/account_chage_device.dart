@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:simobiplus/components/sinarmas_button_rounded.dart';
 import 'package:simobiplus/styling/greyLineFull.dart';
+import 'package:simobiplus/components/sinarmas_countdown_timer.dart';
 
 class AccountChangeDevice extends StatefulWidget {
   const AccountChangeDevice({
@@ -97,6 +97,34 @@ class AccountChangeDeviceState extends State<AccountChangeDevice> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text('Time remaining', style: TextStyle(color: Colors.grey[600], fontSize: 15)),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: CountdownTimer(
+                              endTime: timer,
+                              onEnd:() {
+                                print('onEnd');
+                              },
+                              widgetBuilder: (context, time) {
+                                
+                                if(time == null){
+                                  return Text('Expired', style: TextStyle(color: Color(0xffFA3F70), fontSize: 15, fontWeight: FontWeight.bold,));
+                                };
+
+                                var min = _getNumberAddZero(time.min ?? 0);
+                                var sec = _getNumberAddZero(time.sec ?? 0);
+                                return Text(
+                                  '${min}:${sec}', style: TextStyle(color: Color(0xffFA3F70), fontSize: 15, fontWeight: FontWeight.bold,)
+                                );
+                              },
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
