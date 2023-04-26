@@ -3,11 +3,15 @@ import 'package:flutter/gestures.dart';
 import 'package:simobiplus/bottombar.dart';
 import 'package:simobiplus/components/sinarmas_button_secondary_rounded.dart';
 import 'package:simobiplus/packages/simas_icons.dart';
+import 'package:simobiplus/pages/accountmenu/clear_data.dart';
 
 class Easypin extends StatefulWidget {
   const Easypin({
     super.key,
+    required this.continueTo,
   });
+
+  final Widget continueTo;
 
   @override
   State<Easypin> createState() => _EasypinState();
@@ -29,14 +33,22 @@ class _EasypinState extends State<Easypin> {
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        leading: GestureDetector(
-          child: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Material(
+            color: Colors.transparent,
+            shape: const CircleBorder(),
+            clipBehavior: Clip.hardEdge,
+            child: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
           ),
-          onTap: () {
-            Navigator.pop(context);
-          },
         ),
         actions: [
           TextButton(
@@ -59,21 +71,12 @@ class _EasypinState extends State<Easypin> {
             flex: 8,
             child: Container(
               width: double.infinity,
-              // transform: Matrix4.translationValues(0.0, -70.0, 0.0),
-              // clipBehavior: Clip.hardEdge,
-              // decoration: const BoxDecoration(
-              //   borderRadius: BorderRadius.only(
-              //     topRight: Radius.circular(25),
-              //     topLeft: Radius.circular(25),
-              //   ),
-              // ),
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Form(
                 key: _EasypinFormKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // SizedBox(height: !_keyboardVisible ? 20 : 120),
                     const SizedBox(height: 30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -125,6 +128,34 @@ class _EasypinState extends State<Easypin> {
                       'Your account will be blocked after 3 incorrect attempts',
                       style: TextStyle(color: Colors.white),
                     ),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          // fontSize: 20.0,
+                        ),
+                        children: <TextSpan>[
+                          const TextSpan(
+                              text: 'Have Login problem? ',
+                              style: TextStyle(color: Colors.white)),
+                          TextSpan(
+                            text: 'Reset EasyPIN',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              decoration: TextDecoration.underline,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => ClearDevice(),
+                                );
+                              },
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(height: 8),
                     RichText(
                       textAlign: TextAlign.center,
@@ -158,7 +189,7 @@ class _EasypinState extends State<Easypin> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const BottomBar(),
+                            builder: (context) => widget.continueTo,
                           ),
                         );
                       },

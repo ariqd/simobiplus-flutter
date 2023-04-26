@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:simobiplus/bottombar.dart';
 import 'package:simobiplus/packages/simas_icons.dart';
 import 'package:simobiplus/pages/easypin/easypin.dart';
+import 'package:simobiplus/pages/summary_portofolio/summary_portofolio.dart';
 
 class BoxSummaryPortfolio extends StatelessWidget {
   const BoxSummaryPortfolio({super.key});
@@ -22,7 +24,9 @@ class BoxSummaryPortfolio extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const Easypin(),
+              builder: (context) => const Easypin(
+                continueTo: SummaryPortofolio(),
+              ),
             ),
           );
         },
@@ -39,7 +43,7 @@ class BoxSummaryPortfolio extends StatelessWidget {
               height: 10,
             ),
             Text(
-              'Summary Portfolio',
+              'Summary Portofolio',
               style: TextStyle(
                 fontSize: 16,
               ),

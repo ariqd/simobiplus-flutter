@@ -41,6 +41,10 @@ dependencies:
   intl: ^0.17.0
   hexcolor: ^3.0.1
 
+  flutter_switch: ^0.3.2
+
+  flutter_countdown_timer: ^4.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -71,6 +75,8 @@ flutter:
     - assets/images/
     - assets/images/products/
     - assets/images/membership/
+    - assets/images/cards/
+
   fonts:
     - family: simas
       fonts:

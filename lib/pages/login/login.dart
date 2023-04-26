@@ -128,8 +128,8 @@ class _LoginState extends State<Login> {
                         suffixIcon: IconButton(
                           icon: Icon(
                             !_passwordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                             color: Colors.grey,
                           ),
                           onPressed: () {
@@ -189,10 +189,6 @@ class _LoginState extends State<Login> {
                         ],
                       ),
                     ),
-                    // const Text(
-                    //   "Don't have an account? Register here",
-                    //   textAlign: TextAlign.center,
-                    // ),
                   ],
                 ),
               ),

@@ -21,10 +21,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const List<Widget> _widgetOptions = <Widget>[
     Dashboard(),
     FundTransfer(),
-    // Text(
-    //   'Index 2: QRIS',
-    //   style: optionStyle,
-    // ),
     Text(
       'Index 2: Cash',
       style: optionStyle,
