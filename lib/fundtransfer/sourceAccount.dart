@@ -39,19 +39,23 @@ class _SourceAccountState extends State<SourceAccount> {
       backgroundColor: Colors.grey[200],
       //You should use `Scaffold` if you have `TextField` in body.
       //Otherwise on focus your `TextField` won`t scroll when keyboard popup.
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(
+          'Transfer',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        leading: const BackButton(
+          color: Colors.pink, // <-- SEE HERE
+        ),
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            //Header Container
-            Container(
-                padding: const EdgeInsets.all(8.0),
-                color: Colors.white,
-                alignment: Alignment.centerLeft,
-                child: BackButton(
-                  color: Colors.pink,
-                )),
-
             //Body Container
             Expanded(
               child: SingleChildScrollView(

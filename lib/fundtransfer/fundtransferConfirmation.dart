@@ -39,19 +39,20 @@ class _FundTransferConfirmationState extends State<FundTransferConfirmation> {
     return Scaffold(
       //You should use `Scaffold` if you have `TextField` in body.
       //Otherwise on focus your `TextField` won`t scroll when keyboard popup.
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text('Confirmation'),
+        backgroundColor: Color(0xffFA3F70),
+        centerTitle: true,
+        leading: const BackButton(
+          color: Colors.white, // <-- SEE HERE
+        ),
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            //Header Container
-            Container(
-                padding: const EdgeInsets.all(8.0),
-                color: Colors.white,
-                alignment: Alignment.centerLeft,
-                child: BackButton(
-                  color: Colors.pink,
-                )),
-
             //Body Container
             Expanded(
               child: SingleChildScrollView(
