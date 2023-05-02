@@ -12,6 +12,8 @@ import 'clear_data.dart';
 import 'account_chage_pass.dart';
 import 'account_chage_easypin.dart';
 import 'account_chage_device.dart';
+import 'account_ibank_pref.dart';
+import 'account_favorite_transaction.dart';
 
 class AccountMenu extends StatelessWidget {
   const AccountMenu({super.key});
@@ -291,11 +293,21 @@ class AccountMenu extends StatelessWidget {
                               'Change your current password for login and other verification purpose',
                           menuIcon: 'assets/images/password.png')),
                       greyLine(),
-                      AccountSettingsList(
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AccountIbankPref(),
+                              ),
+                            );
+                          },
+                          child: AccountSettingsList(
                           menu: 'account',
                           menuTitle: 'Internet Banking',
                           menuTxt: 'Manage your internet Banking access',
-                          menuIcon: 'assets/images/logoIB.png'),
+                          menuIcon: 'assets/images/logoIB.png')),
                       greyLine(),
                     ],
                   ),
@@ -412,11 +424,21 @@ class AccountMenu extends StatelessWidget {
                           menuTxt: 'Keep all your scheduled transfer',
                           menuIcon: 'assets/images/schedule.png'),
                       greyLine(),
-                      AccountSettingsList(
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AccountFavoriteTransaction(),
+                              ),
+                            );
+                          },
+                      child: AccountSettingsList(
                           menu: 'account',
                           menuTitle: 'Favorite Transaction',
                           menuTxt: 'List of your favorite transaction',
-                          menuIcon: 'assets/images/favtrx.png'),
+                          menuIcon: 'assets/images/favtrx.png')),
                       greyLine(),
                       AccountSettingsList(
                           menu: 'account',
