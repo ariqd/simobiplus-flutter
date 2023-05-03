@@ -2,333 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:simobiplus/styling/greyLineFull.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class ChooseFavType extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20))
-      ),
-      contentPadding: EdgeInsets.only(top: 20, right: 20, left: 20),
-      content: 
-      Container(
-        height: MediaQuery.of(context).size.height * 0.1,
-        child: 
-        Column(
-          children: [
-           
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: GestureDetector(
-                onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => NewFavBank(),
-                        );
-                      },
-                child:
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text('New Bank Account', style: TextStyle(fontSize: 15, color: Colors.black)),
-                  ],
-                )
-              ),
-            ),
-
-            greyLineFull(),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: GestureDetector(
-                onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => NewFavBiller(),
-                        );
-                      },
-                child:
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text('New Biller', style: TextStyle(fontSize: 15, color: Colors.black)),
-                  ],
-                )
-              ),
-            ),
-            
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class NewFavBank extends StatefulWidget {
-  const NewFavBank({
-    super.key,
-  });
-
-  @override
-  State<NewFavBank> createState() => NewFavBankState();
-}
-
 List<DropdownMenuItem<String>> get bankList{
   List<DropdownMenuItem<String>> menuItems = [
     DropdownMenuItem(child: Text("Select Bank"),value: "00"),
-    DropdownMenuItem(child: Text("Bank Sinarmas"),value: "01"),
-    DropdownMenuItem(child: Text("Mandiri"),value: "02"),
-    DropdownMenuItem(child: Text("BCA"),value: "03"),
-    DropdownMenuItem(child: Text("Danamon"),value: "04"),
+    DropdownMenuItem(child: Text("Bank Sinarmas"),value: "Bank Sinarmas"),
+    DropdownMenuItem(child: Text("Mandiri"),value: "Mandiri"),
+    DropdownMenuItem(child: Text("BCA"),value: "BCA"),
+    DropdownMenuItem(child: Text("Danamon"),value: "Danamon"),
   ];
   return menuItems;
-}
-
-class NewFavBankState extends State<NewFavBank> {
-
-  final accNum = TextEditingController();
-  final accName = TextEditingController();
-
-  String selectedBank = '00';
-
-  void dispose() {
-    accNum.dispose();
-    accName.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20))
-      ),
-      contentPadding: EdgeInsets.only(top: 20, right: 20, left: 20),
-      content: 
-      Container(
-        height: MediaQuery.of(context).size.height * 0.40,
-        width: MediaQuery.of(context).size.width * 1,
-        child: 
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top:20),
-              child: Text('New Bank Account', 
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                fontFamily: 'Roboto')),
-            ),
-            
-            Padding(
-              padding: const EdgeInsets.only(bottom:8.0),
-              child: TextFormField(
-                    controller: accNum,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: 'Account Number',
-                    ),
-                  ),
-            ),
-
-            Container(
-              width: MediaQuery.of(context).size.width * 1,
-              child: Text('Bank Name or Code', style: TextStyle(color: Colors.grey,fontSize: 18), textAlign: TextAlign.left,)
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(bottom:8.0),
-              child: 
-              DropdownButtonFormField(
-                items: bankList,
-                hint: Text('Select Bank', style: TextStyle(color: Colors.grey,fontSize: 18)),
-                style: TextStyle(color: Colors.black, fontSize: 18),
-                icon: Icon(Icons.expand_more),
-                value: selectedBank,
-                onChanged: 
-                  (String? newValue){
-                    setState(() {
-                      selectedBank = newValue!;
-                      if (newValue != '00'){
-                        accName.text = 'RINTIS';
-                      }else{
-                        accName.text = '';
-                      }
-                      
-                    });
-                  },
-                )
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(bottom:8.0),
-              child: TextFormField(
-                    controller: accName,
-                    enabled: false,
-                    decoration: InputDecoration(
-                      labelText: 'Account Name',
-                    ),
-                  ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context, 'CANCEL'),
-                    child: const Text('CANCEL', style: TextStyle(color: Color(0xffFA3F70), fontSize: 18)),
-                  ),
-                  TextButton(
-                    onPressed:() {
-                      int count = 0;
-                      Navigator.popUntil(context, (route) {
-                          return count++ == 2;
-                      });
-                    },
-                    child: const Text('SAVE', style: TextStyle(color: Color(0xffFA3F70), fontSize: 18)),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class NewFavBiller extends StatefulWidget {
-  const NewFavBiller({
-    super.key,
-  });
-
-  @override
-  State<NewFavBiller> createState() => NewFavBillerState();
 }
 
 List<DropdownMenuItem<String>> get billerList{
   List<DropdownMenuItem<String>> menuItems = [
     DropdownMenuItem(child: Text("Select Biller"),value: "00"),
-    DropdownMenuItem(child: Text("OVO"),value: "01"),
-    DropdownMenuItem(child: Text("Go-Pay Customer"),value: "02"),
-    DropdownMenuItem(child: Text("Tokopedia"),value: "03"),
-    DropdownMenuItem(child: Text("ShoppePay"),value: "04"),
+    DropdownMenuItem(child: Text("OVO"),value: "OVO"),
+    DropdownMenuItem(child: Text("Go-Pay Customer"),value: "Go-Pay Customer"),
+    DropdownMenuItem(child: Text("Tokopedia"),value: "Tokopedia"),
+    DropdownMenuItem(child: Text("ShoppePay"),value: "ShoppePay"),
   ];
   return menuItems;
-}
-
-class NewFavBillerState extends State<NewFavBiller> {
-
-  final alias = TextEditingController();
-  final subName = TextEditingController();
-
-  String selectedBiller = '00';
-
-  void dispose() {
-    alias.dispose();
-    subName.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20))
-      ),
-      contentPadding: EdgeInsets.only(top: 20, right: 20, left: 20),
-      content: 
-      Container(
-        height: MediaQuery.of(context).size.height * 0.40,
-        width: MediaQuery.of(context).size.width * 1,
-        child: 
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top:20, bottom: 20),
-              child: Text('Add new Biller', 
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                fontFamily: 'Roboto')),
-            ),
-
-            Container(
-              width: MediaQuery.of(context).size.width * 1,
-              child: Text('Biller Name', style: TextStyle(color: Colors.grey,fontSize: 14), textAlign: TextAlign.left,)
-            ),
-            
-            Padding(
-              padding: const EdgeInsets.only(bottom:8.0),
-              child: 
-              DropdownButtonFormField(
-                items: billerList,
-                hint: Text('Select Biller', style: TextStyle(color: Colors.grey,fontSize: 18)),
-                style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-                icon: Icon(Icons.expand_more),
-                value: selectedBiller,
-                onChanged: 
-                  (String? newValue){
-                    setState(() {
-                      selectedBiller = newValue!;
-                    });
-                  },
-                )
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(bottom:8.0),
-              child: TextFormField(
-                    controller: alias,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: 'Alias',
-                    ),
-                  ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(bottom:8.0),
-              child: TextFormField(
-                    controller: subName,
-                    enabled: false,
-                    decoration: InputDecoration(
-                      labelText: 'Subscriber number',
-                    ),
-                  ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context, 'CANCEL'),
-                    child: const Text('CANCEL', style: TextStyle(color: Color(0xffFA3F70), fontSize: 18)),
-                  ),
-                  TextButton(
-                    onPressed:() {
-                      int count = 0;
-                      Navigator.popUntil(context, (route) {
-                          return count++ == 2;
-                      });
-                    },
-                    child: const Text('SAVE', style: TextStyle(color: Color(0xffFA3F70), fontSize: 18)),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
 }
 
 class AccountFavoriteTransaction extends StatefulWidget {
@@ -343,10 +36,22 @@ class AccountFavoriteTransaction extends StatefulWidget {
 class AccountFavoriteTransactionState extends State<AccountFavoriteTransaction> {
   bool inetEnabled = false;
 
+  //Search
   final searchValue = TextEditingController();
   bool isSearching = false;
   String searchText = '';
   List searchResults = [];
+
+  //Fav Bank
+  final accNum = TextEditingController();
+  final accName = TextEditingController();
+  String selectedBank = '00';
+
+  //Fav Biller
+  final alias = TextEditingController();
+  final subName = TextEditingController();
+  String selectedBiller = '00';
+
 
   AccountFavoriteTransactionState() {
     searchValue.addListener(() {
@@ -366,6 +71,10 @@ class AccountFavoriteTransactionState extends State<AccountFavoriteTransaction> 
 
   void dispose() {
     searchValue.dispose();
+    accNum.dispose();
+    accName.dispose();
+    alias.dispose();
+    subName.dispose();
     super.dispose();
   }
 
@@ -400,7 +109,24 @@ class AccountFavoriteTransactionState extends State<AccountFavoriteTransaction> 
       'accNum' : '124125',
       'biller': 'Tokopedia'
     },
+    {
+      'alias': 'bank',
+      'accNum' : '12412511',
+      'biller': 'BCA'
+    },
   ];
+
+  void addItem(alias, subName, selectedBiller) {
+    Object newFav = {
+      'alias' : alias,
+      'accNum' : subName,
+      'biller' : selectedBiller
+    };
+
+    setState(() {
+      favItems.add(newFav);
+    });
+  }
 
   void runSearch(String searchText) {
     searchResults.clear();
@@ -465,7 +191,7 @@ class AccountFavoriteTransactionState extends State<AccountFavoriteTransaction> 
                     onTap: () {
                             showDialog(
                               context: context,
-                              builder: (BuildContext context) => ChooseFavType(),
+                              builder: (BuildContext context) => ChooseFavType(context),
                             );
                           },
                     child:
@@ -481,7 +207,7 @@ class AccountFavoriteTransactionState extends State<AccountFavoriteTransaction> 
 
               favItems.length != 0 ?
               SizedBox(
-                height: 400,
+                height: MediaQuery.of(context).size.height * 0.65,
                 child: searchResults.length != 0 || searchValue.text.isNotEmpty ?
                 ListView.separated(
                   itemCount: searchResults.length,
@@ -597,6 +323,277 @@ class AccountFavoriteTransactionState extends State<AccountFavoriteTransaction> 
         ),
         onTap: () {},
   );
+
+  Widget ChooseFavType(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
+      contentPadding: EdgeInsets.only(top: 20, right: 20, left: 20),
+      content: 
+      Container(
+        height: MediaQuery.of(context).size.height * 0.1,
+        child: 
+        Column(
+          children: [
+           
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: GestureDetector(
+                onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => NewFavBank(context),
+                        );
+                      },
+                child:
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('New Bank Account', style: TextStyle(fontSize: 15, color: Colors.black)),
+                  ],
+                )
+              ),
+            ),
+
+            greyLineFull(),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: GestureDetector(
+                onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => NewFavBiller(context),
+                        );
+                      },
+                child:
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('New Biller', style: TextStyle(fontSize: 15, color: Colors.black)),
+                  ],
+                )
+              ),
+            ),
+            
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget NewFavBank(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
+      contentPadding: EdgeInsets.only(top: 20, right: 20, left: 20),
+      content: 
+      Container(
+        height: MediaQuery.of(context).size.height * 0.40,
+        width: MediaQuery.of(context).size.width * 1,
+        child: 
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top:20),
+              child: Text('New Bank Account', 
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                fontFamily: 'Roboto')),
+            ),
+            
+            Padding(
+              padding: const EdgeInsets.only(bottom:8.0),
+              child: TextFormField(
+                    controller: accNum,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Account Number',
+                    ),
+                  ),
+            ),
+
+            Container(
+              width: MediaQuery.of(context).size.width * 1,
+              child: Text('Bank Name or Code', style: TextStyle(color: Colors.grey,fontSize: 18), textAlign: TextAlign.left,)
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(bottom:8.0),
+              child: 
+              DropdownButtonFormField(
+                items: bankList,
+                hint: Text('Select Bank', style: TextStyle(color: Colors.grey,fontSize: 18)),
+                style: TextStyle(color: Colors.black, fontSize: 18),
+                icon: Icon(Icons.expand_more),
+                value: selectedBank,
+                onChanged: 
+                  (String? newValue){
+                    setState(() {
+                      selectedBank = newValue!;
+                      if (newValue != '00'){
+                        accName.text = 'RINTIS';
+                      }else{
+                        accName.text = '';
+                      }
+                      
+                    });
+                  },
+                )
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(bottom:8.0),
+              child: TextFormField(
+                    controller: accName,
+                    enabled: false,
+                    decoration: InputDecoration(
+                      labelText: 'Account Name',
+                    ),
+                  ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'CANCEL'),
+                    child: const Text('CANCEL', style: TextStyle(color: Color(0xffFA3F70), fontSize: 18)),
+                  ),
+                  TextButton(
+                    onPressed: accNum.text.isEmpty || accName.text.isEmpty || selectedBank == '00' ? null : () {
+                      addItem(accName.text, accNum.text, selectedBank);
+                      setState(() {
+                        accName.text = '';
+                        accNum.text = '';
+                        selectedBank = '00';
+                      });
+                      int count = 0;
+                      Navigator.popUntil(context, (route) {
+                          return count++ == 2;
+                      });
+                    },
+                    child: Text('SAVE', style: TextStyle(
+                      color: accNum.text.isEmpty || accName.text.isEmpty || selectedBank == '00' ? Colors.grey :Color(0xffFA3F70), 
+                      fontSize: 18)),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget NewFavBiller(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
+      contentPadding: EdgeInsets.only(top: 20, right: 20, left: 20),
+      content: 
+      Container(
+        height: MediaQuery.of(context).size.height * 0.40,
+        width: MediaQuery.of(context).size.width * 1,
+        child: 
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top:20, bottom: 20),
+              child: Text('Add new Biller', 
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                fontFamily: 'Roboto')),
+            ),
+
+            Container(
+              width: MediaQuery.of(context).size.width * 1,
+              child: Text('Biller Name', style: TextStyle(color: Colors.grey,fontSize: 14), textAlign: TextAlign.left,)
+            ),
+            
+            Padding(
+              padding: const EdgeInsets.only(bottom:8.0),
+              child: 
+              DropdownButtonFormField(
+                items: billerList,
+                hint: Text('Select Biller', style: TextStyle(color: Colors.grey,fontSize: 18)),
+                style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                icon: Icon(Icons.expand_more),
+                value: selectedBiller,
+                onChanged: 
+                  (String? newValue){
+                    setState(() {
+                      selectedBiller = newValue!;
+                    });
+                  },
+                )
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(bottom:8.0),
+              child: TextFormField(
+                    controller: alias,
+                    decoration: InputDecoration(
+                      labelText: 'Alias',
+                    ),
+                  ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(bottom:8.0),
+              child: TextFormField(
+                    controller: subName,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Subscriber number',
+                    ),
+                  ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'CANCEL'),
+                    child: const Text('CANCEL', style: TextStyle(color: Color(0xffFA3F70), fontSize: 18)),
+                  ),
+                  TextButton(
+                    onPressed:alias.text.isEmpty || subName.text.isEmpty || selectedBiller == '00' ? null : () {
+                      addItem(alias.text, subName.text, selectedBiller);
+                      setState(() {
+                        alias.text = '';
+                        subName.text = '';
+                        selectedBiller = '00';
+                      });
+                      int count = 0;
+                      Navigator.popUntil(context, (route) {
+                          return count++ == 2;
+                      });
+                    },
+                    child: Text('SAVE', style: TextStyle(
+                      color: alias.text.isEmpty || subName.text.isEmpty || selectedBiller == '00' ? Colors.grey :Color(0xffFA3F70), 
+                      fontSize: 18)),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
 }
 
 
