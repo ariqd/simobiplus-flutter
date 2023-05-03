@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class ListTransferType extends StatelessWidget {
   final String iconImagePath;
@@ -48,7 +49,9 @@ class ListTransferType extends StatelessWidget {
                             Text(
                               typeTitle,
                               style: TextStyle(
-                                  fontWeight: FontWeight.normal, fontSize: 18),
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18,
+                                  color: HexColor('#2F476D')),
                             ),
                             SizedBox(height: 8),
                             Text(
@@ -63,7 +66,10 @@ class ListTransferType extends StatelessWidget {
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios),
+              Icon(
+                Icons.arrow_forward_ios,
+                color: HexColor('#2F476D'),
+              ),
             ],
           ),
         ),

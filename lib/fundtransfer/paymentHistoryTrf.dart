@@ -5,11 +5,17 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class PaymentHistoryTrf extends StatefulWidget {
   const PaymentHistoryTrf(
-      {Key? key, required this.isBiFast, required this.itemList})
+      {Key? key,
+      required this.isBiFast,
+      required this.itemList,
+      this.backgroundColor = Colors.white,
+      this.valueRadius = 10})
       : super(key: key);
 
   final bool isBiFast;
   final List itemList;
+  final Color backgroundColor;
+  final double valueRadius;
 
   @override
   State<PaymentHistoryTrf> createState() => _PaymentHistoryTrfState();
@@ -62,7 +68,7 @@ class _PaymentHistoryTrfState extends State<PaymentHistoryTrf> {
   Widget build(BuildContext context) {
     final count = _items.length;
     return Container(
-      color: Colors.white,
+      color: widget.backgroundColor,
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,70 +77,34 @@ class _PaymentHistoryTrfState extends State<PaymentHistoryTrf> {
             padding: const EdgeInsets.fromLTRB(16, 5, 16, 0),
             child: Column(
               children: [
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                        flex: 2,
-                        child: Divider(
-                          color: Colors.black,
-                          height: 25,
-                          thickness: 0.6,
-                          indent: 5,
-                          endIndent: 5,
-                        )),
-                    Expanded(
-                        flex: 1,
-                        child: Align(
-                            alignment: Alignment.center, child: Text("OR"))),
-                    Expanded(
-                        flex: 2,
-                        child: Divider(
-                          color: Colors.black,
-                          height: 25,
-                          thickness: 0.6,
-                          indent: 5,
-                          endIndent: 5,
-                        ))
-                  ],
-                ),
-                SizedBox(height: 20),
-                Container(
-                  child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Find from previous transaction",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),
-                      )),
-                ),
                 SizedBox(height: 20),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 5),
                   child: TextFormField(
                     decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
                       hintText: 'Account number',
                       floatingLabelStyle: TextStyle(
                         color: Theme.of(context).primaryColor,
                       ),
                       suffixIcon: const Icon(
                         Icons.search,
-                        color: Colors.grey,
+                        color: Colors.black,
                       ),
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 1,
                           color: Colors.grey,
                         ),
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(widget.valueRadius),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 1,
                           color: Colors.grey,
                         ),
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(widget.valueRadius),
                       ),
                     ),
                   ),
@@ -212,7 +182,7 @@ class _PaymentHistoryTrfState extends State<PaymentHistoryTrf> {
           padding: const EdgeInsets.symmetric(vertical: 5),
           child: Container(
             height: 50,
-            color: Colors.white,
+            color: widget.backgroundColor,
             // child: Center(child: Text('Entry ${_items[index]}')),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
