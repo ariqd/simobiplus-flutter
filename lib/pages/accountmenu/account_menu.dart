@@ -14,6 +14,7 @@ import 'account_chage_easypin.dart';
 import 'account_chage_device.dart';
 import 'account_ibank_pref.dart';
 import 'account_favorite_transaction.dart';
+import 'account_schedule_trf.dart';
 
 class AccountMenu extends StatelessWidget {
   const AccountMenu({super.key});
@@ -418,11 +419,21 @@ class AccountMenu extends StatelessWidget {
                           menuTxt: 'Manage transfer using BI Fast',
                           menuIcon: 'assets/images/biFasticon.png'),
                       greyLine(),
-                      AccountSettingsList(
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ScheduledTransfer(),
+                              ),
+                            );
+                          },
+                      child: AccountSettingsList(
                           menu: 'account',
                           menuTitle: 'Scheduled transfer',
                           menuTxt: 'Keep all your scheduled transfer',
-                          menuIcon: 'assets/images/schedule.png'),
+                          menuIcon: 'assets/images/schedule.png')),
                       greyLine(),
                       GestureDetector(
                           onTap: () {
