@@ -75,17 +75,21 @@ class ScheduledTransferState extends State<ScheduledTransfer> {
           color: Colors.grey[200],
           child: Column (
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 90),
-              //   child: Image.asset(
-              //     'assets/images/no-scheduled.png',
-              //     height: 300,
-              //     width: 300,
-              //   ),
-              // ),
-
-              // Text('You don\'t have scheduled transfer list', style: TextStyle(color: Colors.grey[600]),),
-
+              scheduleTrf.isEmpty ?
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 90),
+                    child: Image.asset(
+                      'assets/images/no-scheduled.png',
+                      height: 300,
+                      width: 300,
+                    ),
+                  ),
+                  Text('You don\'t have scheduled transfer list', style: TextStyle(color: Colors.grey[600]),),
+                ],
+              )
+              :
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.9,
                 child: 

@@ -15,6 +15,7 @@ import 'account_chage_device.dart';
 import 'account_ibank_pref.dart';
 import 'account_favorite_transaction.dart';
 import 'account_schedule_trf.dart';
+import 'account_schedule_billpay.dart';
 
 class AccountMenu extends StatelessWidget {
   const AccountMenu({super.key});
@@ -451,12 +452,22 @@ class AccountMenu extends StatelessWidget {
                           menuTxt: 'List of your favorite transaction',
                           menuIcon: 'assets/images/favtrx.png')),
                       greyLine(),
-                      AccountSettingsList(
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ScheduledBillpayment(),
+                              ),
+                            );
+                          },
+                      child: AccountSettingsList(
                           menu: 'account',
                           menuTitle: 'Scheduled Bill Payment',
                           menuTxt:
                               'Create and track your scheduled bill payment',
-                          menuIcon: 'assets/images/autodebet.png'),
+                          menuIcon: 'assets/images/autodebet.png')),
                       greyLine(),
                       AccountSettingsList(
                           menu: 'account',
