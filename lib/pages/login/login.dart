@@ -16,51 +16,44 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final _loginFormKey = GlobalKey<FormState>();
-  bool _keyboardVisible = false;
   bool _passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
     TextStyle linkStyle = TextStyle(color: Theme.of(context).primaryColor);
-    _keyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
       backgroundColor: Colors.white,
       drawer: const LoginDrawer(),
       body: Column(
         children: <Widget>[
-          Visibility(
-            visible: !_keyboardVisible,
-            child: Expanded(
-              flex: 2,
-              child: Container(
-                color: Theme.of(context).primaryColor,
-                width: double.infinity,
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 40, left: 20),
-                    child: IconButton(
-                      color: Colors.white,
-                      iconSize: 35,
-                      icon: const Icon(Icons.menu),
-                      onPressed: () {
-                        _scaffoldKey.currentState?.openDrawer();
-                      },
-                      tooltip: MaterialLocalizations.of(context)
-                          .openAppDrawerTooltip,
-                    ),
-                  ),
+          Container(
+            height: 130,
+            color: Theme.of(context).primaryColor,
+            width: double.infinity,
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 40, left: 20),
+                child: IconButton(
+                  color: Colors.white,
+                  iconSize: 35,
+                  icon: const Icon(Icons.menu),
+                  onPressed: () {
+                    _scaffoldKey.currentState?.openDrawer();
+                  },
+                  tooltip:
+                      MaterialLocalizations.of(context).openAppDrawerTooltip,
                 ),
               ),
             ),
           ),
           Expanded(
-            flex: 8,
             child: Container(
               width: double.infinity,
-              transform: Matrix4.translationValues(0.0, -70.0, 0.0),
+              transform: Matrix4.translationValues(0.0, -30.0, 0.0),
               clipBehavior: Clip.hardEdge,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -74,7 +67,9 @@ class _LoginState extends State<Login> {
                 key: _loginFormKey,
                 child: Column(
                   children: [
-                    SizedBox(height: !_keyboardVisible ? 20 : 120),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Align(
                       alignment: Alignment.topLeft,
                       child: Image.asset(
@@ -189,6 +184,7 @@ class _LoginState extends State<Login> {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
