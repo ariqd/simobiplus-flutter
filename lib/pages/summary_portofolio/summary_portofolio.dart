@@ -43,7 +43,6 @@ class _SummaryPortofolioState extends State<SummaryPortofolio>
                 labelColor: Colors.black,
                 labelStyle: const TextStyle(
                   fontSize: 16,
-                  // fontWeight: FontWeight.bold,
                 ),
                 tabs: const [
                   Tab(text: 'Account'),
@@ -55,42 +54,17 @@ class _SummaryPortofolioState extends State<SummaryPortofolio>
                 ],
               ),
             ),
-            // The flexible app bar with the tabs
-            // SliverAppBar(
-            //   title: const Text('App Bar'),
-            //   expandedHeight: 200,
-            //   pinned: true,
-            //   forceElevated: innerBoxIsScrolled,
-            //   bottom: const TabBar(tabs: [
-            //     Tab(text: 'Tab 1'),
-            //     Tab(text: 'Tab 2'),
-            //   ]),
-            // )
           ],
           // The content of each tab
           body: TabBarView(
             controller: _tabController,
             children: [
-              // ListView.builder(
-              //   itemBuilder: (context, index) => ListTile(
-              //     title: Text(
-              //       'Tab 1 content $index',
-              //     ),
-              //   ),
-              // ),
               const SummarySavingAccount(),
               const SummaryTimeDeposit(),
               const SummarySavingAccount(),
               const SummaryTimeDeposit(),
               const SummarySavingAccount(),
               const SummaryTimeDeposit(),
-              // ListView.builder(
-              //   itemBuilder: (context, index) => ListTile(
-              //     title: Text(
-              //       'Tab 2 content $index',
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),

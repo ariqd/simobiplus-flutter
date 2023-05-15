@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../transaction_history/transaction_history.dart';
 
 class SummarySavingAccount extends StatefulWidget {
   const SummarySavingAccount({super.key});
@@ -143,7 +144,12 @@ class _SummarySavingAccountState extends State<SummarySavingAccount> {
               height: 70,
               child: InkWell(
                 onTap: () {
-                  print('go to transaction history');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TransactionHistory(),
+                    ),
+                  );
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

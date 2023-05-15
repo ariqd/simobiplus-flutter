@@ -67,7 +67,6 @@ class _EasypinState extends State<Easypin> {
       body: Column(
         children: <Widget>[
           Expanded(
-            flex: 8,
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 30),
