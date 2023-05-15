@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:simobiplus/bottombar.dart';
+// import 'package:simobiplus/bottombar.dart';
 import 'package:simobiplus/components/sinarmas_button_secondary_rounded.dart';
 import 'package:simobiplus/packages/simas_icons.dart';
 import 'package:simobiplus/pages/accountmenu/clear_data.dart';
@@ -19,16 +19,17 @@ class Easypin extends StatefulWidget {
 
 class _EasypinState extends State<Easypin> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final _EasypinFormKey = GlobalKey<FormState>();
-  bool _keyboardVisible = false;
-  bool _passwordVisible = false;
+  final _easypinFormKey = GlobalKey<FormState>();
+  // bool _keyboardVisible = false;
+  // bool _passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    TextStyle linkStyle = TextStyle(color: Theme.of(context).primaryColor);
-    _keyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
+    // TextStyle linkStyle = TextStyle(color: Theme.of(context).primaryColor);
+    // _keyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
@@ -72,7 +73,7 @@ class _EasypinState extends State<Easypin> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Form(
-                key: _EasypinFormKey,
+                key: _easypinFormKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -111,6 +112,11 @@ class _EasypinState extends State<Easypin> {
                           color: Colors.white,
                           fontSize: 24,
                         ),
+                        onChanged: (value) {
+                          if (value.length >= 6) {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          }
+                        },
                         decoration: const InputDecoration(
                           counterText: "",
                           focusColor: Colors.white,
@@ -127,6 +133,7 @@ class _EasypinState extends State<Easypin> {
                       'Your account will be blocked after 3 incorrect attempts',
                       style: TextStyle(color: Colors.white),
                     ),
+                    const SizedBox(height: 10),
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
@@ -148,14 +155,15 @@ class _EasypinState extends State<Easypin> {
                               ..onTap = () {
                                 showDialog(
                                   context: context,
-                                  builder: (BuildContext context) => ClearDevice(),
+                                  builder: (BuildContext context) =>
+                                      ClearDevice(),
                                 );
                               },
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 10),
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(

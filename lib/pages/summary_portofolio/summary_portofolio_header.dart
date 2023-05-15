@@ -27,8 +27,8 @@ class _SummaryPortofolioHeaderState extends State<SummaryPortofolioHeader> {
     return Container(
       alignment: Alignment.center,
       width: double.infinity,
-      height: _expanded ? 350 : 200,
-      padding: const EdgeInsets.fromLTRB(40, 80, 40, 40),
+      height: _expanded ? 320 : 170,
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
@@ -39,6 +39,7 @@ class _SummaryPortofolioHeaderState extends State<SummaryPortofolioHeader> {
       ),
       child: Column(
         children: [
+          const SizedBox(height: 60),
           Row(
             children: [
               InkWell(

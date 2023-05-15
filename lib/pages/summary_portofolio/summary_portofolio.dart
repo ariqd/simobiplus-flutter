@@ -31,6 +31,7 @@ class _SummaryPortofolioState extends State<SummaryPortofolio>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: DefaultTabController(
         length: 2,
         child: NestedScrollView(
@@ -58,13 +59,13 @@ class _SummaryPortofolioState extends State<SummaryPortofolio>
           // The content of each tab
           body: TabBarView(
             controller: _tabController,
-            children: [
-              const SummarySavingAccount(),
-              const SummaryTimeDeposit(),
-              const SummarySavingAccount(),
-              const SummaryTimeDeposit(),
-              const SummarySavingAccount(),
-              const SummaryTimeDeposit(),
+            children: const [
+              SummarySavingAccount(),
+              SummaryTimeDeposit(),
+              SummarySavingAccount(),
+              SummaryTimeDeposit(),
+              SummarySavingAccount(),
+              SummaryTimeDeposit(),
             ],
           ),
         ),
