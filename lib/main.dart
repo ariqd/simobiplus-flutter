@@ -6,6 +6,7 @@ import 'package:simobiplus/components/sinarmas_button_secondary.dart';
 import 'package:simobiplus/components/sinarmas_button.dart';
 
 import 'package:simobiplus/login.dart';
+import 'package:simobiplus/registerdao/chooseregister.dart';
 
 void main() {
   runApp(const MyApp());
@@ -96,7 +97,11 @@ class MyHomePage extends StatelessWidget {
                       SinarmasButtonSecondary(
                         'REGISTER',
                         onPressed: () {
-                          print("Go to REGISTER");
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const Register(),
+                            ),
+                          );
                         },
                       ),
                       const SizedBox(height: 10.0),
