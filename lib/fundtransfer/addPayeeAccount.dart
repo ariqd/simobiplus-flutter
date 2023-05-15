@@ -170,8 +170,49 @@ class _AddPayeeAccountState extends State<AddPayeeAccount> {
                         ],
                       ),
                     ),
-
                     SizedBox(height: 20),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                            flex: 2,
+                            child: Divider(
+                              color: Colors.black,
+                              height: 25,
+                              thickness: 0.6,
+                              indent: 5,
+                              endIndent: 5,
+                            )),
+                        Expanded(
+                            flex: 1,
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: Text("OR"))),
+                        Expanded(
+                            flex: 2,
+                            child: Divider(
+                              color: Colors.black,
+                              height: 25,
+                              thickness: 0.6,
+                              indent: 5,
+                              endIndent: 5,
+                            ))
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Container(
+                      child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              "Find from previous transaction",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black),
+                            ),
+                          )),
+                    ),
                     Container(
                       child: PaymentHistoryTrf(
                           isBiFast: false, itemList: _itemList),

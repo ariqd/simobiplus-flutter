@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:simobiplus/fundtransfer/RemittanceSwiftCode.dart';
 import 'package:simobiplus/fundtransfer/addPayeeAccount.dart';
 import 'package:simobiplus/fundtransfer/listTransferType.dart';
 import 'package:simobiplus/pages/login/login.dart';
@@ -60,22 +62,23 @@ class _FundTransferState extends State<FundTransfer> {
                 children: [
                   SizedBox(height: !_keyboardVisible ? 20 : 120),
                   const SizedBox(height: 15),
-                  const Align(
+                  Align(
                     alignment: Alignment.topLeft,
                     child: Text(
                       'Transfer Type',
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.blueGrey,
+                          color: HexColor('#2F476D'),
                           fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(height: 10),
-                  const Align(
+                  Align(
                     alignment: Alignment.topLeft,
                     child: Text(
                       'Please select the type of transfer',
-                      style: TextStyle(fontSize: 14),
+                      style:
+                          TextStyle(fontSize: 14, color: HexColor('#2F476D')),
                     ),
                   ),
                   const SizedBox(height: 30),
@@ -102,7 +105,7 @@ class _FundTransferState extends State<FundTransfer> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Login()),
+                                builder: (context) => const SwiftCode()),
                           );
                         },
                       ),

@@ -5,19 +5,19 @@ import 'package:simobiplus/components/sinarmas_button_secondary_rounded.dart';
 import 'package:simobiplus/packages/simas_icons.dart';
 import 'package:simobiplus/pages/accountmenu/clear_data.dart';
 
-class Easypin extends StatefulWidget {
-  const Easypin({
+class EasypinFunc extends StatefulWidget {
+  const EasypinFunc({
     super.key,
     required this.continueTo,
   });
 
-  final Widget continueTo;
+  final GestureTapCallback continueTo;
 
   @override
-  State<Easypin> createState() => _EasypinState();
+  State<EasypinFunc> createState() => _EasypinState();
 }
 
-class _EasypinState extends State<Easypin> {
+class _EasypinState extends State<EasypinFunc> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final _EasypinFormKey = GlobalKey<FormState>();
   bool _keyboardVisible = false;
@@ -68,6 +68,7 @@ class _EasypinState extends State<Easypin> {
       body: Column(
         children: <Widget>[
           Expanded(
+            flex: 8,
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -184,14 +185,7 @@ class _EasypinState extends State<Easypin> {
                     const Spacer(),
                     SinarmasButtonSecondaryRounded(
                       'Continue',
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => widget.continueTo,
-                          ),
-                        );
-                      },
+                      onPressed: widget.continueTo,
                     ),
                     const SizedBox(height: 20),
                   ],

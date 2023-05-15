@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class SinarmasButtonRounded extends StatelessWidget {
   final String buttonText;
   final GestureTapCallback onPressed;
+  final bool disabled;
 
   const SinarmasButtonRounded(
     this.buttonText, {
     super.key,
     required this.onPressed,
+    this.disabled = false,
   });
 
   @override
@@ -20,7 +22,7 @@ class SinarmasButtonRounded extends StatelessWidget {
           minHeight: 50,
         ),
         child: ElevatedButton(
-          onPressed: onPressed,
+          onPressed: disabled ? null : onPressed,
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
