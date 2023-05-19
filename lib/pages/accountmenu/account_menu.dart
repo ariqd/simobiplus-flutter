@@ -16,6 +16,7 @@ import 'account_ibank_pref.dart';
 import 'account_favorite_transaction.dart';
 import 'account_schedule_trf.dart';
 import 'account_schedule_billpay.dart';
+import 'account_limit_trf.dart';
 
 class AccountMenu extends StatelessWidget {
   const AccountMenu({super.key});
@@ -475,11 +476,21 @@ class AccountMenu extends StatelessWidget {
                           menuTxt: 'Check and pay your payment request now!',
                           menuIcon: 'assets/images/pushinvoice.png'),
                       greyLine(),
-                      AccountSettingsList(
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const SetLimitTransfer(),
+                              ),
+                            );
+                          },
+                      child: AccountSettingsList(
                           menu: 'account',
                           menuTitle: 'Set Your Own Transfer Limit',
                           menuTxt: 'You can set your transfer limit easily',
-                          menuIcon: 'assets/images/limit.png'),
+                          menuIcon: 'assets/images/limit.png')),
                       greyLine(),
                     ],
                   ),
