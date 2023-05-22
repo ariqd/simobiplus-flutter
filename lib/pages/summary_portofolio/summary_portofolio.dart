@@ -14,11 +14,11 @@ class _SummaryPortofolioState extends State<SummaryPortofolio>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late bool fixedScroll;
+  int _selectedTabbar = 0;
 
   @override
   void initState() {
-    _tabController = TabController(length: 6, vsync: this);
-
+    _tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -31,45 +31,50 @@ class _SummaryPortofolioState extends State<SummaryPortofolio>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: DefaultTabController(
-        length: 2,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            const SliverToBoxAdapter(child: SummaryPortofolioHeader()),
-            SliverToBoxAdapter(
-              child: TabBar(
-                controller: _tabController,
-                isScrollable: true,
-                labelColor: Colors.black,
-                labelStyle: const TextStyle(
-                  fontSize: 16,
-                ),
-                tabs: const [
-                  Tab(text: 'Account'),
-                  Tab(text: 'Time Deposit'),
-                  Tab(text: 'Credit Card'),
-                  Tab(text: 'Loan'),
-                  Tab(text: 'Investment'),
-                  Tab(text: 'Others'),
+      body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints viewportConstraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: viewportConstraints.maxHeight,
+            ),
+            child: IntrinsicHeight(
+              child: Column(
+                children: [
+                  const SummaryPortofolioHeader(),
+                  TabBar(
+                    onTap: (index) {
+                      setState(() {
+                        _selectedTabbar = index;
+                      });
+                    },
+                    controller: _tabController,
+                    isScrollable: true,
+                    labelColor: Colors.black,
+                    labelStyle: const TextStyle(
+                      fontSize: 16,
+                    ),
+                    tabs: const [
+                      Tab(text: 'Account'),
+                      Tab(text: 'Time Deposit'),
+                      Tab(text: 'Credit Card'),
+                    ],
+                  ),
+                  Builder(builder: (_) {
+                    if (_selectedTabbar == 0) {
+                      return const SummarySavingAccount(); //1st custom tabBarView
+                    } else if (_selectedTabbar == 1) {
+                      return const SummaryTimeDeposit(); //1st custom tabBarView
+                    } else {
+                      return const SummarySavingAccount(); //1st custom tabBarView
+                    }
+                  }),
                 ],
               ),
             ),
-          ],
-          // The content of each tab
-          body: TabBarView(
-            controller: _tabController,
-            children: const [
-              SummarySavingAccount(),
-              SummaryTimeDeposit(),
-              SummarySavingAccount(),
-              SummaryTimeDeposit(),
-              SummarySavingAccount(),
-              SummaryTimeDeposit(),
-            ],
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }
